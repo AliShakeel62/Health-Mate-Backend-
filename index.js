@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const imageRoutes = require('./routes/imageRoutes');
-
+const reportRoutes = require("./routes/reportRoutes");
+const { getReportById } = require("./controllers/reportController");
 
 dotenv.config();
 const app = express();
@@ -28,6 +29,9 @@ connectDB();
 // -------------------- Routes --------------------
 app.use("/api/auth", authRoutes);
 app.use("/api/image", imageRoutes);
+app.use("/api/report", reportRoutes);
+app.get("/api/viewreport/:id", getReportById);
+
 
 // Default route
 app.get("/", (req, res) => {
